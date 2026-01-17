@@ -1,0 +1,4 @@
+flask
+openai
+google-genai
+requests
