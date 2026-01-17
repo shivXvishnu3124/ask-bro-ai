@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ask Bro AI 😎</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .box {
+            width: 400px;
+            background: #020617;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background: #38bdf8;
+            cursor: pointer;
+        }
+        .reply {
+            margin-top: 15px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>🤖 Ask Bro AI</h2>
+    <input id="msg" placeholder="Yo bro, ask me anything..." />
+    <button onclick="askAI()">Ask</button>
+    <div class="reply" id="reply"></div>
+</div>
+
+<script>
+async function askAI() {
+    const msg = document.getElementById("msg").value;
+    document.getElementById("reply").innerText = "Thinking... 🤔";
+
+    const res = await fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: msg})
+    });
+
+    const data = await res.json();
+    document.getElementById("reply").innerText = "AI: " + data.reply;
+}
+</script>
+
+</body>
+</html>
